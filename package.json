@@ -6,11 +6,13 @@
   "scripts": {
     "build": "npx tsc",
     "start": "node -r ./dist/index.js",
+    "test": "ts-node ./src/index.ts TEST=OK ",
     "dev": "tsc-watch --onSuccess \"node -r ./dist/index.js --inspect\" "
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "mocha": "^10.2.0",
     "tsc-watch": "6.0.0",
     "typeorm": "0.3.11"
   },

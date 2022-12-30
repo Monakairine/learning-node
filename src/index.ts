@@ -1,7 +1,15 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
+import path from "path";
 
-dotenv.config();
+const args = process.argv[2]
+const isTest = args?.split('=')[1] == 'OK'
+
+if (isTest) {
+  dotenv.config({ path: path.join(__dirname, "..") + "/test.env" });
+} else {
+  dotenv.config();
+}
 
 const app: Express = express();
 const port = process.env.PORT;
