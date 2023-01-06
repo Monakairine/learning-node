@@ -4,21 +4,21 @@ import * as path from "path";
 
 import express = require("express");
 
-export namespace ExpressConfig {
-    export async function configure(
-      port: string | number
-    ): Promise<express.Application> {
-      const app = express();
+export async function startServer(port: string | number): Promise<void> {
 
-      console.info(`Starting server on http://localhost:${port}`);
+    const app = express();
 
-      useExpressServer(app, {
-        controllers: [path.join(__dirname, "..", "**", "*.controller.ts")],
-      });
+    console.info(`Starting server on http://localhost:${port}`);
 
-      return app
-    }
+    useExpressServer(app, {
+        controllers: [path.join(__dirname,'..', "**", "*.controller.ts")],
+    });
+
+    await app.listen(port);
+
+    console.info(`Server started on http://localhost:${port}`);
 }
+
 
 
 //Some questions:
@@ -81,3 +81,10 @@ export namespace ExpressConfig {
 // Using namespaces can also make your code easier to read and understand, as it helps to clearly separate different 
 // parts of your code and indicate their purpose.
 // link: https://www.typescriptlang.org/docs/handbook/namespaces.html
+
+//In recent versions of TypeScript, the use of namespaces is generally considered to be less necessary, as the language has introduced 
+// other features that can help you organize and modularize your code, such as modules and namespaces.
+// That being said, there is nothing inherently wrong with using namespaces
+// in your code, and you are free to use them if you think they can help you 
+// organize and structure your code in a way that makes sense for your specific use case.
+// link: https://levelup.gitconnected.com/typescript-best-practices-namespaces-exceptions-and-type-definitions-131d85579fa3
