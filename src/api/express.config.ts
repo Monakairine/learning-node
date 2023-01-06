@@ -7,6 +7,7 @@ import express = require("express");
 export async function startServer(port: string | number): Promise<void> {
 
     const app = express();
+    app.use(express.json());
 
     console.info(`Starting server on http://localhost:${port}`);
 
@@ -88,3 +89,17 @@ export async function startServer(port: string | number): Promise<void> {
 // in your code, and you are free to use them if you think they can help you 
 // organize and structure your code in a way that makes sense for your specific use case.
 // link: https://levelup.gitconnected.com/typescript-best-practices-namespaces-exceptions-and-type-definitions-131d85579fa3
+
+
+// ------------------------------4. About the express.json())
+// When using express and routing - controllers to build a server application, you might want 
+// to accept and process request bodies with different content types, such as JSON, form data, or raw text.
+// To do this, you can use various middleware functions provided by express, such as express.json, express.urlencoded,
+// and express.text, depending on the content type of the request body.
+// For example, if you want to accept and process request bodies with a JSON content type,
+// you can use the express.json middleware function. This function parses the request body as
+// JSON and makes it available in the req.body property of the request object.
+// On the other hand, if you are not using the express.json middleware function, the req.body 
+// property will not be automatically populated with the parsed request body.You will need to parse the 
+// request body yourself using other means, such as the Buffer or string functions.
+// link: https://expressjs.com/en/api.html
