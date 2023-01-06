@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "baseUrl": "./src",
-    "target": "es2016",
+    "target": "es2017",
     "module": "commonjs",
-    "lib": ["es2016", "esnext.asynciterable"],
+    "lib": ["es2017", "esnext.asynciterable"],
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "removeComments": true,

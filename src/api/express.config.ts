@@ -4,20 +4,25 @@ import * as path from "path";
 
 import express = require("express");
 
-export async function startServer(port: string | number) {
-  const app = express();
+export namespace ExpressConfig {
+    export async function configure(
+      port: string | number
+    ): Promise<express.Application> {
+      const app = express();
 
-  console.info(`Starting server on http://localhost:${port}`);
+      console.info(`Starting server on http://localhost:${port}`);
 
-  useExpressServer(app, {
-    controllers: [path.join(__dirname,'..', "**", "*.controller.ts")],
-  });
+      useExpressServer(app, {
+        controllers: [path.join(__dirname, "..", "**", "*.controller.ts")],
+      });
 
-  await app.listen(port);
+      return app
+    }
 }
 
+
 //Some questions:
-// 1 -------------------- About different ways of starting a server
+// ------------------------------ 1. About different ways of starting a server ------------------------------
 // import { UserController } from "controller/user.controller";
 // import { createExpressServer } from "routing-controllers";
 // import * as path from "path";
@@ -53,15 +58,26 @@ export async function startServer(port: string | number) {
 
 
 
-// 2- About the reflect-metada lib ------------------------------
+// ------------------------------ 2. About the reflect-metada lib ------------------------------
 //it is necessary to import "reflect-metadata" when using routing-controllers. 
 //This is because routing - controllers uses the Reflect metadata API, which is a part of the JavaScript language that allows 
 //you to annotate your code with metadata that can be used at runtime.The "reflect-metadata" import is required to enable this feature.
 
 
 
-//3 - About the use of a Async function:
+// ------------------------------ 3. About the use of a Async function ------------------------------
 // In general, it is a good practice to use async functions when working
 // with asynchronous operations, such as starting a server,
 // to make the code easier to read and understand.However,
 // it is ultimately up to you to decide which approach is best for your specific use case.
+
+
+// ------------------------------4. About the namespace 
+// A namespace is a way to organize and group related code together. 
+// It can contain functions, classes, variables, and other types that can be used by other modules
+// Using namespaces can help you organize and group related code together, and it can also help you avoid naming conflicts when you have multiple types with the same name.
+//For example, you might use a namespace to group all the types related to a specific feature 
+// or functionality of your application, such as a "database" namespace that contains functions and classes related to interacting with a database.
+// Using namespaces can also make your code easier to read and understand, as it helps to clearly separate different 
+// parts of your code and indicate their purpose.
+// link: https://www.typescriptlang.org/docs/handbook/namespaces.html
